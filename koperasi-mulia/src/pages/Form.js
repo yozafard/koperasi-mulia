@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Supabase from '../components/Supabase';
+import SuccessModal from '../components/Modal';
+import SpreadsheetProcess from '../components/DataProcess';
 
 function OrderForm() {
     const [buyerName, setBuyerName] = useState('');
@@ -9,6 +11,7 @@ function OrderForm() {
     const [department, setDepartment] = useState('');
     const [idNumber, setIdNumber] = useState('');
     const [paymentOption, setPaymentOption] = useState('potong_gaji');
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
 
     function handleBuyerNameChange(event) {
@@ -147,8 +150,19 @@ function OrderForm() {
             console.error('Error submitting order:', error.message);
         }
             console.log(orderData);
+            // SpreadsheetProcess();
             // Handle form submission logic here
+            setShowSuccessModal(true);
+
+            // Optionally, reset form fields
+            setBuyerName('');
+            setDepartment('');
+            setIdNumber('');
+            setPaymentOption('transfer');
+            setItems([{ itemName: '', quantities: { S: 0, M: 0, L: 0, XL: 0, XL3: 0, XL5: 0 } }]);
+
         }
+    
     
     return (
         <form onSubmit={handleSubmit} className='p-4'>
@@ -203,6 +217,8 @@ function OrderForm() {
         </div>
             {renderItems()}
             <button type="submit" className='bg-blue-500 text-l font-bold text-white p-3 border-solid rounded-lg'>Submit Order</button>
+            {showSuccessModal && <SuccessModal onClose={() => setShowSuccessModal(false)} />}
+
         </form>
     );
 }
