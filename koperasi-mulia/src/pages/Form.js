@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Supabase from '../components/Supabase';
 import SuccessModal from '../components/Modal';
-import SpreadsheetProcess from '../components/DataProcess';
+// import SpreadsheetProcess from '../components/DataProcess';
 
 function OrderForm() {
     const [buyerName, setBuyerName] = useState('');
