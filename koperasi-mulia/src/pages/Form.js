@@ -136,16 +136,15 @@ function OrderForm() {
         };
 
         const formattedData = formatDataForSupabase(orderData);
-        console.log(formattedData)
-
     try {
+        console.log(formattedData[0]);
         let { error } = await Supabase
             .from('Order')
             .insert(formattedData);
-
+        
         if (error) throw error;
-
-        // setShowModal(true);
+        // await SpreadsheetProcess(formattedData);
+        setShowModal(true);
         } catch (error) {
             console.error('Error submitting order:', error.message);
         }
@@ -190,7 +189,7 @@ function OrderForm() {
                 <label className='p-2 pl-0'>
                     <input
                         type="radio"
-                        value="transfer"
+                        value="potong_gaji"
                         checked={paymentOption === 'potong_gaji'}
                         onChange={handlePaymentOptionChange}
                     />
