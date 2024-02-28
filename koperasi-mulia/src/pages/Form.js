@@ -144,7 +144,7 @@ function OrderForm() {
         
         if (error) throw error;
         // await SpreadsheetProcess(formattedData);
-        setShowModal(true);
+        setShowSuccessModal(true);
         } catch (error) {
             console.error('Error submitting order:', error.message);
         }
